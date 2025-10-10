@@ -43,7 +43,6 @@ COPY run_tts_server.py ./
 COPY test_*.py ./
 COPY demo_*.py ./
 COPY docker-startup.sh ./
-COPY test_imports.py ./
 
 # Make startup script executable
 RUN chmod +x docker-startup.sh
