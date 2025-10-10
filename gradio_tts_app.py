@@ -6,7 +6,7 @@ import torch
 import gradio as gr
 import torchaudio as ta
 
-from chatterbox_vllm.tts import ChatterboxTTS
+from chatterbox_tts.tts import ChatterboxTTS
 
 DEVICE = "cuda"
 

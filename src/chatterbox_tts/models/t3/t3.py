@@ -30,8 +30,8 @@ from vllm.multimodal.processing import (
 from vllm.multimodal.profiling import BaseDummyInputsBuilder
 from vllm.sequence import IntermediateTensors
 
-from chatterbox_vllm.models.t3.modules.learned_pos_emb import LearnedPositionEmbeddings
-from chatterbox_vllm.models.t3.modules.t3_config import T3Config
+from chatterbox_tts.models.t3.modules.learned_pos_emb import LearnedPositionEmbeddings
+from chatterbox_tts.models.t3.modules.t3_config import T3Config
 from .modules.cond_enc import T3Cond, T3CondEnc
 
 

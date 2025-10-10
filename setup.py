@@ -23,7 +23,7 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     package_data={
-        "chatterbox_vllm": ["models/t3/*.json", "models/*/t3/*.json"]
+        "chatterbox_tts": ["models/t3/*.json", "models/*/t3/*.json"]
     },
     python_requires=">=3.10",
     install_requires=[

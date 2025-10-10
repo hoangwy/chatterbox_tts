@@ -12,7 +12,7 @@ import torch.nn.functional as F
 from huggingface_hub import hf_hub_download
 from safetensors.torch import load_file
 
-from chatterbox_vllm.models.t3.modules.t3_config import T3Config
+from chatterbox_tts.models.t3.modules.t3_config import T3Config
 
 from .models.s3tokenizer import S3_SR, drop_invalid_tokens
 from .models.s3gen import S3GEN_SR, S3Gen

@@ -11,7 +11,7 @@ import torchaudio as ta
 from fastapi import FastAPI, UploadFile, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
 from pydantic import BaseModel
-from chatterbox_vllm.tts import ChatterboxTTS
+from chatterbox_tts.tts import ChatterboxTTS
 
 # ====== Configuration ======
 AUDIO_PROMPT_PATH = "docs/corey.mp3"

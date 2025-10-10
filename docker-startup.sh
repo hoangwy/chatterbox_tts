@@ -11,9 +11,9 @@ uv pip list | grep -E "(chatterbox|torch|vllm)" || echo "No relevant packages fo
 
 # Test basic imports
 echo "Testing basic imports..."
-python -c "import chatterbox_vllm; print('✓ chatterbox_vllm imported')" || echo "❌ chatterbox_vllm import failed"
+python -c "import chatterbox_tts; print('✓ chatterbox_tts imported')" || echo "❌ chatterbox_tts import failed"
 
-python -c "from chatterbox_vllm.models.t3.modules.t3_config import T3Config; print('✓ T3Config imported')" || echo "❌ T3Config import failed"
+python -c "from chatterbox_tts.models.t3.modules.t3_config import T3Config; print('✓ T3Config imported')" || echo "❌ T3Config import failed"
 
 # Try to start the server
 echo "Starting TTS server..."

@@ -40,7 +40,7 @@ version = { file = ".latest-version.generated.txt" }
 where = ["src"]
 
 [tool.setuptools.package-data]
-chatterbox_vllm = ["models/t3/*.json", "models/*/t3/*.json"]
+chatterbox_tts = ["models/t3/*.json", "models/*/t3/*.json"]
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
