@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  tts-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
+    container_name: chatterbox-tts-server-cpu
+    ports:
+      - "8081:8081"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=""
+    volumes:
+      # Mount model cache directory for faster subsequent builds
+      - ./t3-model:/app/t3-model:ro
+      # Mount docs for audio prompts
+      - ./docs:/app/docs:ro
+      # Optional: Mount output directory for generated audio files
+      - ./output:/app/output
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
