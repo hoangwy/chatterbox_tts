@@ -31,7 +31,6 @@ htmlcov/
 /local.properties
 
 # Test files
-*.mp3
 *.wav
 trace.json
 
