@@ -59,6 +59,11 @@ COPY src/ ./src/
 COPY docs/ ./docs/
 COPY t3-model/ ./t3-model/
 COPY tts_server.py ./
+COPY tts_server_api.py ./
+COPY system_events.py ./
+COPY configuration.py ./
+COPY utils.py ./
+COPY api/ ./api/
 
 # Create non-root user
 RUN useradd -m -u 1000 ttsuser && \

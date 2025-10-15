@@ -1,30 +1,26 @@
-# Use NVIDIA CUDA base image for GPU support
-# RTX 3090 with CUDA 12.8 support
-FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+# CPU-only Dockerfile for Chatterbox TTS Server
+# For users without GPU support or for development/testing
+
+FROM python:3.12-slim
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
-ENV CUDA_VISIBLE_DEVICES=0
+ENV CUDA_VISIBLE_DEVICES=""
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    python3-dev \
     git \
     wget \
     curl \
     ffmpeg \
     libsndfile1 \
     libsndfile1-dev \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv
-RUN pip3 install uv
-
-# Create symbolic link for python
-RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN pip install --upgrade pip uv
 
 # Set working directory
 WORKDIR /app
@@ -57,6 +53,13 @@ RUN chmod +x docker-startup.sh
 # Install Python dependencies using uv
 # Use editable install to ensure the package is available
 RUN uv pip install --system -e .
+
+# Create non-root user for security
+RUN useradd -m -u 1000 ttsuser && \
+    chown -R ttsuser:ttsuser /app
+
+# Switch to non-root user
+USER ttsuser
 
 # Expose the port
 EXPOSE 8081

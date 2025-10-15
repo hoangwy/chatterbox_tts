@@ -58,7 +58,7 @@ fi
 # Test base image availability
 echo "🔍 Testing base image availability..."
 if [ "$CPU_ONLY" = true ]; then
-    BASE_IMAGE="ubuntu:22.04"
+    BASE_IMAGE="python:3.12-slim"
 else
     BASE_IMAGE="nvidia/cuda:12.4.1-devel-ubuntu22.04"
 fi
