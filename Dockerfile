@@ -58,6 +58,16 @@ RUN chmod +x docker-startup.sh
 # Use editable install to ensure the package is available
 RUN uv pip install --system -e .
 
+# Create output directory and set permissions
+RUN mkdir -p /app/output && chmod 755 /app/output
+
+# Create non-root user for security
+RUN useradd -m -u 1000 ttsuser && \
+    chown -R ttsuser:ttsuser /app
+
+# Switch to non-root user
+USER ttsuser
+
 # Expose the port
 EXPOSE 8081
 

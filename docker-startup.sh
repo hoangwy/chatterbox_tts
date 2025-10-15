@@ -15,6 +15,14 @@ python -c "import chatterbox_tts; print('✓ chatterbox_tts imported')" || echo 
 
 python -c "from chatterbox_tts.models.t3.modules.t3_config import T3Config; print('✓ T3Config imported')" || echo "❌ T3Config import failed"
 
+# Test audio directory creation
+echo "Testing audio directory creation..."
+if [ -f "test_audio_directory.py" ]; then
+    python test_audio_directory.py || echo "❌ Audio directory test failed"
+else
+    echo "⚠️  test_audio_directory.py not found, skipping test"
+fi
+
 # Try to start the server
 echo "Starting TTS server..."
 python tts_server.py

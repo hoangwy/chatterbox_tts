@@ -65,6 +65,9 @@ COPY configuration.py ./
 COPY utils.py ./
 COPY api/ ./api/
 
+# Create output directory and set permissions
+RUN mkdir -p /app/output && chmod 755 /app/output
+
 # Create non-root user
 RUN useradd -m -u 1000 ttsuser && \
     chown -R ttsuser:ttsuser /app

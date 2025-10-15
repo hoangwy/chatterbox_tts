@@ -120,6 +120,8 @@ Both versions mount the following directories:
 - `./docs:/app/docs:ro` - Documentation and samples (read-only)
 - `./output:/app/output` - Generated audio output (read-write)
 
+**Note**: Audio files are saved to the `output` directory inside the container, which is mounted to `./output` on the host system. This ensures generated audio files are accessible on the host machine.
+
 ## Health Checks
 
 All containers include health checks that:
@@ -154,6 +156,13 @@ If you encounter GPU-related issues:
 1. Check Docker is running: `docker info`
 2. Ensure sufficient disk space
 3. Try building without cache: `docker build --no-cache`
+
+### Audio Directory Issues
+If you encounter permission errors with audio file creation:
+1. Ensure the `output` directory exists on the host: `mkdir -p ./output`
+2. Check directory permissions: `ls -la ./output`
+3. Run the test script inside the container: `docker exec -it <container> python test_audio_directory.py`
+4. The code automatically falls back to the current directory if the output directory is not writable
 
 ## Development
 
