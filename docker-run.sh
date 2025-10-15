@@ -51,13 +51,13 @@ else
     PORT="8081"
 fi
 
-# Create output directory if it doesn't exist
-mkdir -p output
+# Create audio directory if it doesn't exist
+mkdir -p audio
 
 echo "🐳 Starting container..."
 echo "   Port: $PORT"
 echo "   GPU: $([ "$CPU_ONLY" = true ] && echo "Disabled (CPU-only)" || echo "Enabled (if available)")"
-echo "   Output directory: ./output"
+echo "   Audio directory: ./audio"
 echo ""
 
 # Run with docker-compose if available, otherwise run manually
@@ -75,7 +75,7 @@ else
             -p $PORT:8081 \
             -v "$(pwd)/docs:/app/docs:ro" \
             -v "$(pwd)/t3-model:/app/t3-model:ro" \
-            -v "$(pwd)/output:/app/output" \
+            -v "$(pwd)/audio:/app/audio" \
             --name chatterbox-tts-server-cpu \
             "$IMAGE_NAME"
     else
@@ -84,7 +84,7 @@ else
             -p $PORT:8081 \
             -v "$(pwd)/docs:/app/docs:ro" \
             -v "$(pwd)/t3-model:/app/t3-model:ro" \
-            -v "$(pwd)/output:/app/output" \
+            -v "$(pwd)/audio:/app/audio" \
             --name chatterbox-tts-server \
             "$IMAGE_NAME"
     fi

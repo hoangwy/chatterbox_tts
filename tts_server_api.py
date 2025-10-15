@@ -96,14 +96,14 @@ def create_api_routes(app):
             # Stitch audio chunks together
             full_audio = torch.cat(audios, dim=-1)
             
-            # Save to output folder (mounted in Docker)
-            output_dir = "output"
+            # Save to audio folder
+            output_dir = "audio"
             try:
                 os.makedirs(output_dir, exist_ok=True)
             except PermissionError:
-                # Fallback to current directory if output directory is not writable
+                # Fallback to current directory if audio directory is not writable
                 output_dir = "."
-                print(f"[SPEECH] Warning: Could not create output directory, using current directory")
+                print(f"[SPEECH] Warning: Could not create audio directory, using current directory")
             
             filename = f"speech_{int(time.time())}.mp3"
             autoPath = f"{output_dir}/{filename}"

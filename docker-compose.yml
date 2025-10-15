@@ -14,8 +14,8 @@ services:
       - ./t3-model:/app/t3-model
       # Mount docs for audio prompts
       - ./docs:/app/docs:ro
-      # Optional: Mount output directory for generated audio files
-      - ./output:/app/output
+      # Mount audio directory for generated audio files
+      - ./audio:/app/audio
     deploy:
       resources:
         reservations:
@@ -51,8 +51,8 @@ services:
       - ./t3-model:/app/t3-model
       # Mount docs for audio prompts
       - ./docs:/app/docs:ro
-      # Optional: Mount output directory for generated audio files
-      - ./output:/app/output
+      # Mount audio directory for generated audio files
+      - ./audio:/app/audio
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8081/"]

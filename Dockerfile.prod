@@ -65,8 +65,8 @@ COPY configuration.py ./
 COPY utils.py ./
 COPY api/ ./api/
 
-# Create output directory and set permissions
-RUN mkdir -p /app/output && chmod 755 /app/output
+# Create audio directory and set permissions
+RUN mkdir -p /app/audio && chmod 755 /app/audio
 
 # Create non-root user
 RUN useradd -m -u 1000 ttsuser && \
