@@ -68,12 +68,6 @@ COPY api/ ./api/
 # Create audio directory and set permissions
 RUN mkdir -p /app/audio && chmod 755 /app/audio
 
-# Create non-root user
-RUN useradd -m -u 1000 ttsuser && \
-    chown -R ttsuser:ttsuser /app
-
-USER ttsuser
-
 # Expose port
 EXPOSE 8081
 

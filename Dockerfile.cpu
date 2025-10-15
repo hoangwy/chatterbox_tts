@@ -57,13 +57,6 @@ RUN uv pip install --system -e .
 # Create audio directory and set permissions
 RUN mkdir -p /app/audio && chmod 755 /app/audio
 
-# Create non-root user for security
-RUN useradd -m -u 1000 ttsuser && \
-    chown -R ttsuser:ttsuser /app
-
-# Switch to non-root user
-USER ttsuser
-
 # Expose the port
 EXPOSE 8081
 
