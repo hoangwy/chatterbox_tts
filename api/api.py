@@ -1,6 +1,6 @@
 import requests
 
-rootUrl = "http://localhost:3001/api"
+rootUrl = "http://209.38.74.62:3001/api"
 
 def updateEpisodeStatus(state):
     """    
