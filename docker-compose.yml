@@ -35,35 +35,3 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
-  # CPU-only version for users without GPU support
-  tts-server-cpu:
-    build:
-      context: .
-      dockerfile: Dockerfile.cpu
-    container_name: chatterbox-tts-server-cpu
-    ports:
-      - "8082:8081"
-    environment:
-      - PYTHONUNBUFFERED=1
-    volumes:
-      # Mount model cache directory for faster subsequent builds
-      - ./t3-model:/app/t3-model
-      # Mount docs for audio prompts
-      - ./docs:/app/docs:ro
-      # Mount audio directory for generated audio files
-      - ./audio:/app/audio
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    profiles:
-      - cpu

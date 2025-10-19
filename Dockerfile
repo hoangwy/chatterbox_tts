@@ -51,6 +51,9 @@ COPY docker-startup.sh ./
 # Copy API directory
 COPY api/ ./api/
 
+# Copy additional files that might be needed
+COPY *.py ./
+
 # Make startup script executable
 RUN chmod +x docker-startup.sh
 

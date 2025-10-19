@@ -17,11 +17,7 @@ python -c "from chatterbox_tts.models.t3.modules.t3_config import T3Config; prin
 
 # Test audio directory creation
 echo "Testing audio directory creation..."
-if [ -f "test_audio_directory.py" ]; then
-    python test_audio_directory.py || echo "❌ Audio directory test failed"
-else
-    echo "⚠️  test_audio_directory.py not found, skipping test"
-fi
+mkdir -p /app/audio && echo "✓ Audio directory created" || echo "❌ Failed to create audio directory"
 
 # Try to start the server
 echo "Starting TTS server..."

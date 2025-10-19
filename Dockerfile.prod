@@ -65,6 +65,9 @@ COPY configuration.py ./
 COPY utils.py ./
 COPY api/ ./api/
 
+# Copy additional Python files
+COPY *.py ./
+
 # Create audio directory and set permissions
 RUN mkdir -p /app/audio && chmod 755 /app/audio
 
