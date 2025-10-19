@@ -90,7 +90,7 @@ def process_queued_article(article_data):
             output_dir = "."
             print(f"[QUEUE] Warning: Could not create audio directory, using current directory")
         
-        filename = f"{title}.mp3"
+        filename = f"speech_{int(time.time())}.mp3"
         audioPath = f"{output_dir}/{filename}"
         ta.save(audioPath, full_audio, model.sr, format="mp3")
         print(f"[QUEUE] Audio saved to: {audioPath}")
@@ -234,7 +234,7 @@ def create_api_routes(app):
                 output_dir = "."
                 print(f"[SPEECH] Warning: Could not create audio directory, using current directory")
             
-            filename = f"{title}.mp3"
+            filename = f"speech_{int(time.time())}.mp3"
             autoPath = f"{output_dir}/{filename}"
             ta.save(autoPath, full_audio, model.sr, format="mp3")
             print(f"[SPEECH] Audio saved to: {autoPath}")
