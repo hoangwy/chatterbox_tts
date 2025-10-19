@@ -234,13 +234,13 @@ def create_api_routes(app):
                 output_dir = "."
                 print(f"[SPEECH] Warning: Could not create audio directory, using current directory")
             
-            filename = f"speech_{int(time.time())}.mp3"
+            filename = f"{title}.mp3"
             autoPath = f"{output_dir}/{filename}"
             ta.save(autoPath, full_audio, model.sr, format="mp3")
             print(f"[SPEECH] Audio saved to: {autoPath}")
             
             # Upload to Acast
-            uploadToAcast(autoPath, showId, title, subtitle, text)
+            # uploadToAcast(autoPath, showId, title, subtitle, text)
             
             buf = io.BytesIO()
             ta.save(buf, full_audio, model.sr, format="mp3")
