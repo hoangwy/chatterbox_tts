@@ -15,6 +15,9 @@ create_api_routes(app)
 @app.on_event("startup")
 def startup_handler():
     system_events.load_model()
+    # Start polling for queued articles
+    from tts_server_api import start_polling_thread
+    start_polling_thread()
 
 
 # ====== Shutdown ======

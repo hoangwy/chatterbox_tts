@@ -1,16 +1,12 @@
 import requests
 
-rootUrl = "https://localhost/v1"
+rootUrl = "http://localhost:3001/api"
 
 def updateEpisodeStatus(state):
-    """
-    Update the status of an episode.
-    
+    """    
     Args:
         state (str): Episode status
-            "0": processing
-            "1": finish
-            "2": error
+            "queue", "processing", "finished", "error"
     """
     url = f"{rootUrl}/updateStatus"
     data = {"status": state}
@@ -25,12 +21,6 @@ def updateEpisodeStatus(state):
 
 
 def addUploadedEpisole(data):
-    """
-    Add an uploaded episode.
-    
-    Args:
-        data: Episode data to upload
-    """
     url = f"{rootUrl}/addUploadedEpisole"
     
     try:
@@ -39,4 +29,16 @@ def addUploadedEpisole(data):
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error adding uploaded episode: {e}")
+        return None
+
+
+def getQueuedArticle():
+    url = f"{rootUrl}/getQueuedArticle"
+    
+    try:
+        response = requests.post(url, data={})
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error getting queued article: {e}")
         return None
