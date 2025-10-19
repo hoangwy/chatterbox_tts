@@ -1,6 +1,28 @@
 version: '3.8'
 
 services:
+  api-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: chatterbox-api-service
+    ports:
+      - "3003:3003"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   tts-server:
     build: .
     container_name: chatterbox-tts-server
@@ -9,6 +31,7 @@ services:
     environment:
       - CUDA_VISIBLE_DEVICES=0
       - PYTHONUNBUFFERED=1
+      - API_SERVICE_URL=http://api-service:3003
     volumes:
       # Mount model cache directory for faster subsequent builds
       - ./t3-model:/app/t3-model
@@ -16,6 +39,8 @@ services:
       - ./docs:/app/docs:ro
       # Mount audio directory for generated audio files
       - ./audio:/app/audio
+    depends_on:
+      - api-service
     deploy:
       resources:
         reservations:
