@@ -12,38 +12,7 @@ import configuration
 import system_events
 import utils
 import api.acast as acast
-import requests
-import os
-
-# API Service Configuration
-API_SERVICE_URL = os.getenv("API_SERVICE_URL", "http://localhost:3003")
-
-def call_api_service(endpoint: str, data: dict = None):
-    """Call the API service"""
-    url = f"{API_SERVICE_URL}/{endpoint}"
-    
-    try:
-        if data is None:
-            response = requests.post(url, json={})
-        else:
-            response = requests.post(url, json=data)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error calling API service {endpoint}: {e}")
-        return None
-
-def updateEpisodeStatus(state):
-    """Update episode status via API service"""
-    return call_api_service("updateStatus", {"status": state})
-
-def addUploadedEpisole(data):
-    """Add uploaded episode via API service"""
-    return call_api_service("addUploadedEpisole", data)
-
-def getQueuedArticle():
-    """Get queued article via API service"""
-    return call_api_service("getQueuedArticle")
+import api.api as api
 
 def uploadToAcast(audioPath: str, showId: str, title: str, subtitle: str, text: str) -> bool:
     try:
@@ -144,7 +113,7 @@ def poll_queued_articles():
     while True:
         try:
             print(f"[QUEUE] Checking for queued articles...")
-            result = getQueuedArticle()
+            result = api.getQueuedArticle()
             
             if result and result.get("data") is not None:
                 article_data = result["data"]
@@ -192,9 +161,9 @@ def create_api_routes(app):
 
     @app.post("/getQueuedArticle")
     async def get_queued_article():
-        """Get a queued article from the API service"""
+        """Get a queued article from the external API"""
         try:
-            result = getQueuedArticle()
+            result = api.getQueuedArticle()
             return result
         except Exception as e:
             print(f"[API] Error getting queued article: {e}")
