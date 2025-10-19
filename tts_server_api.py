@@ -90,18 +90,18 @@ def process_queued_article(article_data):
             output_dir = "."
             print(f"[QUEUE] Warning: Could not create audio directory, using current directory")
         
-        filename = f"speech_{int(time.time())}.mp3"
+        filename = f"{title}.mp3"
         audioPath = f"{output_dir}/{filename}"
         ta.save(audioPath, full_audio, model.sr, format="mp3")
         print(f"[QUEUE] Audio saved to: {audioPath}")
         
         # Upload to Acast
-        success = uploadToAcast(audioPath, showId, title, subtitle, text)
+        # success = uploadToAcast(audioPath, showId, title, subtitle, text)
         
         generation_time = time.time() - start_time
         print(f"[QUEUE] Generated audio from {len(text_chunks)} chunks in {generation_time:.2f} seconds.")
         
-        return success
+        return True
         
     except Exception as e:
         print(f"[QUEUE] Error processing queued article: {e}")
@@ -176,7 +176,7 @@ def create_api_routes(app):
             raise HTTPException(status_code=503, detail="Model not loaded yet")
 
         # Extract parameters from request
-        text = request.get("input", "")
+        text = request.get("content", "")
         exaggeration = request.get("exaggeration", 0.5)
         min_p = request.get("min_p", 0.1)
         showId = request.get("showId", "")
