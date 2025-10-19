@@ -1,6 +1,14 @@
 import requests
 
 rootUrl = "http://209.38.74.62:3001/api"
+API_TOKEN = "EhrPbyW4xyFA"
+
+def get_headers():
+    """Get headers with Bearer token"""
+    return {
+        "Authorization": f"Bearer {API_TOKEN}",
+        "Content-Type": "application/json"
+    }
 
 def updateEpisodeStatus(state):
     """    
@@ -12,7 +20,7 @@ def updateEpisodeStatus(state):
     data = {"status": state}
     
     try:
-        response = requests.post(url, data=data)
+        response = requests.post(url, json=data, headers=get_headers())
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -24,7 +32,7 @@ def addUploadedEpisole(data):
     url = f"{rootUrl}/addUploadedEpisole"
     
     try:
-        response = requests.post(url, data=data)
+        response = requests.post(url, json=data, headers=get_headers())
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -36,7 +44,7 @@ def getQueuedArticle():
     url = f"{rootUrl}/getQueuedArticle"
     
     try:
-        response = requests.post(url, data={})
+        response = requests.post(url, json={}, headers=get_headers())
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:

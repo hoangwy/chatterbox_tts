@@ -37,8 +37,8 @@ def process_queued_article(article_data):
         print(f"[QUEUE] Processing queued article: {article_data}")
         
         # Extract article data
-        text = article_data.get("text", "")
-        showId = article_data.get("showId", "")
+        text = article_data.get("content", "")
+        showId = article_data.get("podcastId", "")
         title = article_data.get("title", "")
         subtitle = article_data.get("subtitle", "")
         exaggeration = article_data.get("exaggeration", 0.5)
