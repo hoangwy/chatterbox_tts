@@ -135,9 +135,9 @@ def poll_queued_articles():
         except Exception as e:
             print(f"[QUEUE] Error polling for articles: {e}")
         
-        # Wait 5 minutes before next poll (only if no article was processed successfully)
-        print(f"[QUEUE] Waiting 5 minutes before next poll...")
-        time.sleep(300)  # 5 minutes = 300 seconds
+        # Wait 1 minute before next poll (only if no article was processed successfully)
+        print(f"[QUEUE] Waiting 1 minute before next poll...")
+        time.sleep(60)  # 1 minute = 60 seconds
 
 
 def start_polling_thread():
