@@ -95,6 +95,11 @@ def process_queued_article(article_data):
         ta.save(audioPath, full_audio, model.sr, format="mp3")
         print(f"[QUEUE] Audio saved to: {audioPath}")
         
+        # Update episode status with file information
+        article_id = article_data.get("id", "")
+        if article_id:
+            api.updateEpisodeStatus("finished", article_id, fileName=filename)
+        
         # Upload to Acast
         # success = uploadToAcast(audioPath, showId, title, subtitle, text)
         
