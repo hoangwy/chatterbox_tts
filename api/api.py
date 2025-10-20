@@ -1,6 +1,6 @@
 import requests
 
-rootUrl = "http://143.198.100.198:3003/api"
+rootUrl = "http://146.190.165.214:3003/api"
 API_TOKEN = "EhrPbyW4xyFA"
 
 def get_headers():
