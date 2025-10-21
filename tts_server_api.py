@@ -37,7 +37,7 @@ def process_queued_article(article_data):
         
         # Extract article data
         text = article_data.get("content", "")
-        showId = article_data.get("podcastId", "")
+        showId = article_data.get("showId", "")
         title = article_data.get("title", "")
         subtitle = article_data.get("subtitle", "")
         exaggeration = article_data.get("exaggeration", 0.5)
@@ -82,8 +82,8 @@ def process_queued_article(article_data):
         # Stitch audio chunks together
         full_audio = torch.cat(audios, dim=-1)
         
-        # Save to audio folder
-        output_dir = "audio"
+        # Save to audio folder outside chatterbox_tts directory
+        output_dir = "../audio"
         try:
             os.makedirs(output_dir, exist_ok=True)
         except PermissionError:

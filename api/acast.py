@@ -5,7 +5,7 @@ from pathlib import Path
 from . import api
 
 rootUrl = "https://open.acast.com/rest"
-apiKey = None
+apiKey = "504d881d72e8f439288e25a67d4b249901e55e3d00e087487fea4c2e55efb151"
 
 def getHeaders() -> dict:
     """Get headers with global API key"""
@@ -37,13 +37,6 @@ def uploadToAcast(
         episode_data['subtitle'] = subtitle
     if summary:
         episode_data['summary'] = summary
-    
-    # Set API key if not already set
-    global apiKey
-    if not apiKey:
-        apiKey = os.getenv('ACAST_API_KEY')
-        if not apiKey:
-            raise ValueError("ACAST_API_KEY environment variable must be set")
     
     print(f"[ACAST] Uploading audio to Acast: {audioPath}")
     
