@@ -61,8 +61,8 @@ RUN chmod +x docker-startup.sh
 # Use editable install to ensure the package is available
 RUN uv pip install --system -e .
 
-# Create audio directory and set permissions
-RUN mkdir -p /app/audio && chmod 755 /app/audio
+# Create audio directory outside /app and set permissions
+RUN mkdir -p /audio && chmod 755 /audio
 
 # Expose the port
 EXPOSE 8081

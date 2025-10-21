@@ -14,8 +14,8 @@ services:
       - ./t3-model:/app/t3-model
       # Mount docs for audio prompts
       - ./docs:/app/docs:ro
-      # Mount audio directory for generated audio files
-      - ./audio:/app/audio
+      # Mount external audio directory for generated audio files
+      - ../audio:/audio
     deploy:
       resources:
         reservations:

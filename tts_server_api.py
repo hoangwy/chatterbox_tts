@@ -83,7 +83,7 @@ def process_queued_article(article_data):
         full_audio = torch.cat(audios, dim=-1)
         
         # Save to audio folder outside chatterbox_tts directory
-        output_dir = "../audio"
+        output_dir = "/audio"
         try:
             os.makedirs(output_dir, exist_ok=True)
         except PermissionError:
